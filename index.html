@@ -23,8 +23,64 @@
         <button v-on:click="toggleImg()">Show Image</button>
 
         <div v-if="showImg">
-          <img src="images/logo-with-margin.png">
+          <h2>Basic conditional</h2>
+          <img @click="imgClick" src="images/logo-with-margin.png">
         </div>
+
+        <div>
+          <h2>JS Compound Conditional</h2>
+
+          <div>
+            <button @click="showImgOptions">View Image Size Options</button>
+          </div>
+
+          <img src="images/logo-with-margin.png" :height="imgHeight" :width="imgWidth">
+        </div>
+
+        <div>
+          <h2>Vue Compound Conditional</h2>
+
+          <div>
+            <button @click="altShowImgOptions">View Image Size Options</button>
+          </div>
+
+          <img v-if="smallImg" src="images/logo-with-margin.png" height="150" width="150">
+          <img v-else-if="medImg" src="images/logo-with-margin.png" height="250" width="250">
+          <img v-else-if="lgImg" src="images/logo-with-margin.png" height="350" width="350">
+        </div>
+
+        <div>
+          <h2>Prevent Default</h2>
+
+          <div><a :href="instagram">Instagram</a></div>
+          <div><a :href="instagram" @click.prevent="igClick">Instagram</a></div>
+        </div>
+
+
+        <div>
+          <h2>Square</h2>
+
+          <input type="text" @keyup="square">
+          <div>{{ squaredResult }}</div>
+        </div>
+
+        <div>
+          <h2>Model Binding</h2>
+
+          <input type="text" v-model="firstName">
+          <input type="text" v-model="lastName">
+
+          <div>Hi there, {{ firstName }} {{ lastName}}</div>
+        </div>
+
+
+        <div>
+          <h2>Hot Keys</h2>
+
+          <button @click.alt="hotKey">Click Me with Alt</button>
+          <button @click.shift="hotKey">Click Me with Shift</button>
+        </div>
+
       </div>
 
       <h2>Branding Guidelines</h2>
@@ -113,11 +169,9 @@
           <li>Logo Do’s and Do Not’s above still apply.</li>
         </ul>
 
-        <div class="alternate_logo_images">
-          <img class="image_logos" src="images/ds_circle_logo.png">
-          <img class="image_logos" src="images/ds_square_logo.png">
-          <img class="text_logos" src="images/ds_icon_text_logo.png">
-          <img class="text_logos" src="images/ds_text_logo.png">
+        <div id="logoList" class="alternate_logo_images">
+          <!-- {{ testing }} -->
+          <img v-for="logo in logos" :class="logo.className" :src="logo.imgSource">
         </div>
       </div>
 
